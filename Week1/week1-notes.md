@@ -40,10 +40,10 @@
 
 	- $h$: maps from $x$ to $y$.
 	
-	$ h_{\theta}(x) = \theta_0 + \theta_1 x $
+	$h_{\theta}(x) = \theta_0 + \theta_1 x$
 
-		- Shorthand: $h(x)$
-		- Univariate linear regression.
+	- Shorthand: $h(x)$
+	- Univariate linear regression.
 
 ## Cost function
 
@@ -52,7 +52,7 @@ Hypothesis: $h(x) = \theta_0 + \theta_1 x$
 	- how to choose $\theta_i$'s?
 
 - Optimization problem:
-$ \underset{\theta_0, \theta_1}{min} J\big( \theta_0, \theta_1 \big) := \displaystyle\frac{1}{2m} \displaystyle\sum_{i=1}^{m} \bigg( h_{\theta} \big( x^{(i)} \big) - y^{(i)} \bigg)^{2}$
+$\underset{\theta_0, \theta_1}{min} J\big( \theta_0, \theta_1 \big) := \displaystyle\frac{1}{2m} \displaystyle\sum_{i=1}^{m} \bigg( h_{\theta} \big( x^{(i)} \big) - y^{(i)} \bigg)^{2}$
 	- Squared error function, or mean squared error.
 		- "The mean is halved as a convenience for the computation of the gradient descent, as the derivative term of the square function will cancel out the $\frac{1}{2}$ term."
 
@@ -71,8 +71,8 @@ Have some function $J(\theta_0, \theta_1)$ we want to minimize.
 
 temp0 $ := \theta_0 - \alpha \displaystyle\frac{\partial}{\partial \theta_0} J(\theta_0, \theta_1)$
 temp1 $:= \theta_1 - \alpha \displaystyle\frac{\partial}{\partial \theta_1} J(\theta_0, \theta_1)$
-$\theta_0 := $ temp0
-$\theta_1 := $ temp1
+$\theta_0 :=$ temp0
+$\theta_1 :=$ temp1
 
 - $\alpha$: learning rate
 
@@ -80,5 +80,75 @@ $\theta_1 := $ temp1
 
 $\displaystyle\frac{\partial}{\partial \theta_{j}} J(\theta_0, \theta_1) = \displaystyle\frac{\partial}{\partial \theta_{j}} \displaystyle\frac{1}{2m} \displaystyle\sum_{i=1}^{m} \bigg( h_{\theta} \big( x^{(i)} \big) - y^{(i)} \bigg)^{2}$
 
-	- for $j = 0$: $\displaystyle\frac{\partial}{\partial \theta_{j}} J(\theta_0, \theta_1) = \displaystyle\frac{1}{m} \displaystyle\sum_{i=1}^{m} \bigg( h_{\theta} \big( x^{(i)} \big) - y^{(i)} \bigg)$
-	- for $j = 1$: $\displaystyle\frac{\partial}{\partial \theta_{j}} J(\theta_0, \theta_1) = \displaystyle\frac{1}{m} \displaystyle\sum_{i=1}^{m} \bigg( h_{\theta} \big( x^{(i)} \big) - y^{(i)} \bigg) \cdot x^{(i)}$
+- for $j = 0$: $\displaystyle\frac{\partial}{\partial \theta_{j}} J(\theta_0, \theta_1) = \displaystyle\frac{1}{m} \displaystyle\sum_{i=1}^{m} \bigg( h_{\theta} \big( x^{(i)} \big) - y^{(i)} \bigg)$
+- for $j = 1$: $\displaystyle\frac{\partial}{\partial \theta_{j}} J(\theta_0, \theta_1) = \displaystyle\frac{1}{m} \displaystyle\sum_{i=1}^{m} \bigg( h_{\theta} \big( x^{(i)} \big) - y^{(i)} \bigg) \cdot x^{(i)}$
+
+
+
+# Matrices and Vectors
+
+**Matrix**: rectangular array of numbers.
+$$
+A = 
+\begin{bmatrix}
+1402 & 191 \\
+1371 & 821 \\
+949 & 1437 \\
+147 & 1448
+\end{bmatrix}
+$$
+
+- Dimension of matrix: number of rows x number of columns.
+
+**Matrix elements**: entries of the matrix.
+
+- $A_{ij} = $ the entry in $i$-th row, $j$-th column.
+
+**Vector**: an $n \times 1$ (or $1 \times n$) matrix.
+
+**Vector elements**:
+
+- $y_i =$ the $i$-th element.
+
+
+
+## Matrix Addition
+
+$$
+\begin{bmatrix} 1 & 0 \\ 2 & 5 \\ 3 & 1 \end{bmatrix}
++
+\begin{bmatrix} 4 & 0.5 \\ 2 & 5 \\ 0 & 1 \end{bmatrix}
+=
+\begin{bmatrix} 5 & 0.5 \\ 4 & 10 \\ 3 & 2 \end{bmatrix}
+$$
+
+- The matrices must have the same dimensions!
+- We add the elements with the same coordinates.
+
+## Scalar Multiplication
+
+$$
+3 \cdot
+\begin{bmatrix} 1 & 0 \\ 2 & 5 \end{bmatrix}
+=
+\begin{bmatrix} 3 & 0 \\ 6 & 15 \end{bmatrix}
+$$
+
+- We multiply each element by the scalar.
+
+## Combination of Operands
+
+$$
+3 \cdot
+\begin{bmatrix} 1 \\ 4 \\ 2 \end{bmatrix}
++
+\begin{bmatrix} 0 \\ 0 \\ 5 \end{bmatrix}
+-
+\begin{bmatrix} 3 \\ 0 \\ 2 \end{bmatrix}
+/3
+=
+\begin{bmatrix} 2 \\ 12 \\ \frac{31}{3} \end{bmatrix}
+$$
+
+## Matrix-vector Multiplication
+
