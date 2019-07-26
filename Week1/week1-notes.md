@@ -17,12 +17,12 @@
 
 - Cocktail party problem algorithm [Octave]:
 
-~~~
+~~~octave
 [W,s,v] = svd((repmat(sum(x.*x,1),size(x,1),1).*x)*x');
 ~~~
 
-	- svd: Singular Value Decomposition
-	- repmat: repeat matrix
+- `svd`: Singular Value Decomposition
+- `repmat`: repeat matrix
 
 # Linear Regression
 
@@ -52,7 +52,7 @@ Hypothesis: $h(x) = \theta_0 + \theta_1 x$
 	- how to choose $\theta_i$'s?
 
 - Optimization problem:
-$\underset{\theta_0, \theta_1}{min} J\big( \theta_0, \theta_1 \big) := \displaystyle\frac{1}{2m} \displaystyle\sum_{i=1}^{m} \bigg( h_{\theta} \big( x^{(i)} \big) - y^{(i)} \bigg)^{2}$
+$\underset{\theta_0, \theta_1}{min}\  J\big( \theta_0, \theta_1 \big) := \displaystyle\frac{1}{2m} \displaystyle\sum_{i=1}^{m} \bigg( h_{\theta} \big( x^{(i)} \big) - y^{(i)} \bigg)^{2}$
 	- Squared error function, or mean squared error.
 		- "The mean is halved as a convenience for the computation of the gradient descent, as the derivative term of the square function will cancel out the $\frac{1}{2}$ term."
 
@@ -69,10 +69,10 @@ Have some function $J(\theta_0, \theta_1)$ we want to minimize.
 
 - Correct: simultaneous update
 
-temp0 $ := \theta_0 - \alpha \displaystyle\frac{\partial}{\partial \theta_0} J(\theta_0, \theta_1)$
-temp1 $:= \theta_1 - \alpha \displaystyle\frac{\partial}{\partial \theta_1} J(\theta_0, \theta_1)$
-$\theta_0 :=$ temp0
-$\theta_1 :=$ temp1
+`temp0` $ := \theta_0 - \alpha \displaystyle\frac{\partial}{\partial \theta_0} J(\theta_0, \theta_1)$
+`temp1` $:= \theta_1 - \alpha \displaystyle\frac{\partial}{\partial \theta_1} J(\theta_0, \theta_1)$
+$\theta_0 :=$ `temp0`
+$\theta_1 :=$ `temp1`
 
 - $\alpha$: learning rate
 
@@ -151,4 +151,159 @@ $$
 $$
 
 ## Matrix-vector Multiplication
+
+$$
+\begin{bmatrix} 1 & 3 \\ 4 & 0 \\ 2 & 1 \end{bmatrix}
+\cdot
+\begin{bmatrix} 1 \\ 5 \end{bmatrix}
+=
+\begin{bmatrix} 1 \cdot 1 + 3 \cdot 5 \\ 4 \cdot 1 + 0 \cdot 5 \\ 2 \cdot 1 + 1 \cdot 5 \end{bmatrix}
+=
+\begin{bmatrix} 16 \\ 4 \\ 7 \end{bmatrix}
+$$
+
+- $m \times n$ matrix, multiplied by a $n \times 1$ matrix (or $n$-dimensional vector), results in an $m$-dimensional vector.
+
+- Given the multiplications of a matrix $A_{m \times n}$ by a vector $x_n$, resulting in a vector $y_m$, we get each element $y_i$ by multiplying the $i$-th row of $A$ by $x$ (element-wise) and adding them up.
+
+## Hypothesis: Matrix Form
+
+$$
+h_{\theta}(x) =
+\begin{bmatrix}
+1 & x_0 \\
+1 & x_1 \\
+1 & x_2 \\
+1 & x_3 \\
+\vdots & \vdots
+\end{bmatrix}
+\cdot
+\begin{bmatrix}
+\theta_0 \\
+\theta_1
+\end{bmatrix}
+$$
+
+## Matrix Multiplication
+
+- Example:
+
+$$
+\begin{bmatrix}
+1 & 3 & 2 \\
+4 & 0 & 1
+\end{bmatrix}
+\cdot
+\begin{bmatrix}
+	\begin{bmatrix} 1 \\ 0 \\ 5 \end{bmatrix} &
+	\begin{bmatrix} 3 \\ 1 \\ 2 \end{bmatrix}
+\end{bmatrix}
+$$
+
+- Part 1:
+
+$$
+\begin{bmatrix}
+1 & 3 & 2 \\
+4 & 0 & 1
+\end{bmatrix}
+\cdot
+\begin{bmatrix}
+1 \\ 0 \\ 5
+\end{bmatrix}
+=
+\begin{bmatrix}
+11 \\ 9
+\end{bmatrix}
+$$
+
+- Part 2:
+
+$$
+\begin{bmatrix}
+1 & 3 & 2 \\
+4 & 0 & 1
+\end{bmatrix}
+\cdot
+\begin{bmatrix}
+3 \\ 1 \\ 2
+\end{bmatrix}
+=
+\begin{bmatrix}
+10 \\ 14
+\end{bmatrix}
+$$
+
+- Result:
+
+$$
+\begin{bmatrix}
+1 & 3 & 2 \\
+4 & 0 & 1
+\end{bmatrix}
+\cdot
+\begin{bmatrix}
+1 & 3 \\
+0 & 1 \\
+5 & 2
+\end{bmatrix}
+=
+\begin{bmatrix}
+11 & 10 \\
+9 & 14
+\end{bmatrix}
+$$
+
+- The number of columns of the left matrix must be equal to the number of rows of the right matrix!
+- The multiplication of a matrix $A_{m \times n}$ by a matrix $B_{n \times p}$ results in $C_{m \times p}$.
+
+- The $i$-th column of the matrix $C$ is obtained by multiplying  $A$ with the $i$-th column of $B$, for $i = 1, 2, ..., p$.
+
+
+
+### Properties
+
+- **Not** commutative! : $A \times B \neq B \times A$.
+- Associative: $(A \times B) \times C = A \times (B \times C)$.
+
+- Identity matrix: $A \cdot I = I \cdot A = A$:
+  - $A_{m \times n} \times I_n = A_{m \times n}$.
+  - $I_m \times A_{m \times n} = A_{m \times n}$.
+
+$$
+I_n =
+\begin{bmatrix}
+1 & 0 & 0 & \cdots & 0 \\
+0 & 1 & 0 & \cdots & 0 \\
+0 & 0 & 1 & \cdots & 0 \\
+\vdots & \vdots & \vdots & \ddots & \vdots \\
+0 & 0 & 0 & \cdots & 1 
+\end{bmatrix}
+$$
+
+## Inverse and transpose
+
+### Inverse
+
+If $A$ is an $m \times m$ matrix, and **if it has an inverse**, then:
+$$
+A \cdot A^{-1} = A^{-1} \cdot A = I_m .
+$$
+
+- Not all matrices have an inverse.
+- *Only* square matrices have inverses.
+
+~~~octave
+A = [3 4; 2 16]
+inv_A = pinv(A) # inverse of A: [0.4 -0.1; -0.05 0.075]
+A * inv_A # identity (eye)
+~~~
+
+### Transpose
+
+Let $A$ be an $m \times n$ matrix, and let $B = A^{T}$.
+
+Then $B$ is an $n \times m$ matrix, and $B_{ij} = A_{ji}$.
+
+
 
