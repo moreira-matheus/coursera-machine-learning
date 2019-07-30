@@ -240,6 +240,8 @@ $$
 
 ~~~octave
 delta = (h(X) - y)' * X;
-theta = theta - alpha * delta';
+% X: (m, (n+1)) matrix
+% y: (m, 1) vector
+theta = theta - alpha * delta'/m;
 ~~~
 
